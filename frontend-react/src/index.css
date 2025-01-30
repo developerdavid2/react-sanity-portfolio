@@ -1,0 +1,238 @@
+@import "https://rsms.me/inter/inter.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, sans-serif;
+}
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+  cursor: none;
+
+}
+
+@layer utilities {
+  body {
+    @apply text-light-700 bg-dark-gradient-0;
+  }
+
+  /* Typography for Headings */
+  .h-num {
+    @apply text-[80px] font-bold leading-[84px];
+  }
+
+  .h1 {
+    @apply text-[64px] font-bold leading-[64px] tracking-[-0.03em];
+  }
+
+  .h2 {
+    @apply text-[48px] font-bold leading-[64px];
+  }
+
+  .h3 {
+    @apply text-[40px] font-bold leading-[56px] tracking-[-0.03em];
+  }
+
+  .h4 {
+    @apply text-[32px] font-bold leading-[52px] tracking-[-0.03em];
+  }
+
+  .h5 {
+    @apply text-[24px] font-bold leading-[40px];
+  }
+
+  .h6 {
+    @apply text-[16px] font-medium leading-[36px];
+  }
+
+  .text-shadow-bevel {
+    @apply text-light-700;
+    text-shadow:
+      -0.0075em 0.0075em 0 #e7ebf5,
+      0.005em 0.005em 0 #ccd6e8,
+      0.01em 0.01em 0 #b3c1db,
+      0.015em 0.015em 0 #9aacc8,
+      0.02em 0.02em 0 #8197b7,
+      0.025em 0.025em 0 #6a829e,
+      0.03em 0.03em 0 #576f8c,
+      0.035em 0.035em 0 #455d7a;
+  }
+  /*START OF COMMON*/
+  /* START of Common */
+
+  .btn-primary {
+    @apply inline-flex justify-center whitespace-nowrap rounded-full px-3.5 py-2.5 sm:text-sm font-medium text-slate-200 dark:text-slate-800 bg-gradient-to-r from-slate-800 to-slate-700 dark:from-slate-200 dark:to-slate-100 dark:hover:bg-slate-100 shadow focus:outline-none focus:ring focus:ring-slate-500/50 focus-visible:outline-none focus-visible:ring focus-visible:ring-slate-500/50 relative before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,theme(colors.white/.5)_50%,transparent_75%,transparent_100%)] dark:before:bg-[linear-gradient(45deg,transparent_25%,theme(colors.white)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:[transition:background-position_0s_ease] hover:before:bg-[position:-100%_0,0_0] hover:before:duration-[1500ms];
+  }
+
+  .btn-glass {
+    @apply bg-gray-800/10 shadow shadow-black/20 backdrop-blur-sm border border-gray-300/30;
+  }
+
+  .btn-filter {
+    @apply bg-gradient-to-r from-slate-800 to-slate-700 focus-visible:outline-none shadow relative before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,theme(colors.white/.5)_50%,transparent_75%,transparent_100%)]  before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:[transition:background-position_0s_ease] hover:before:bg-[position:-100%_0,0_0] hover:before:duration-[1500ms];
+  }
+  .container {
+    @apply mx-auto max-w-[1252px] px-8 md:px-16;
+  }
+
+  .caption {
+    @apply small-2 mb-5 uppercase text-color-3;
+  }
+
+  .scroll-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .mask-left-right {
+    @apply [mask-image:_linear-gradient(to_right,transparent_0,_black_70px,_black_calc(100%-100px),transparent_100%)];
+  }
+
+  .mask-top-bottom {
+    @apply [mask-image:_linear-gradient(to_bottom,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)];
+  }
+
+  /* END of Common */
+  /*END OF COMMON*/
+
+  /*FLex Utilities*/
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+
+  .flex-start {
+    @apply flex justify-start items-center;
+  }
+  /*START HEADINGS*/
+  .nav-active {
+    @apply text-primary-500;
+  }
+
+  .nav-glass-container {
+    @apply bg-gray-800/10 lg:shadow-lg shadow-black/20 backdrop-blur-md;
+  }
+
+  @property --border-angle {
+    inherits: false;
+    initial-value: 0deg;
+    syntax: "<angle>";
+  }
+
+  /* START WORKS SECTION */
+  .work-tag {
+    @apply bg-dark-500/30 shadow-lg shadow-black/20 backdrop-blur-md border border-zinc-500/10;
+  }
+
+  .work-container-glass {
+    @apply bg-gray-800/10 shadow-lg shadow-black/20 backdrop-blur-xl border border-zinc-500/10;
+  }
+
+  .work-details-glass {
+    @apply bg-zinc-500/10 shadow-lg shadow-black/20 backdrop-blur-sm border border-zinc-500/10  text-zinc-500;
+  }
+
+  /* START SKILLS */
+  .skill-glass-container {
+    @apply bg-gray-700/10 shadow-lg shadow-black/20 backdrop-blur-sm border border-gray-300/30;
+  }
+
+  .skill-hover-bg{
+    @apply bg-gradient-to-r from-slate-800 to-slate-700;
+  }
+
+  /* END SKILLS */
+
+  /* START OF REVIEWS */
+  .masonry-wrapper {
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  .fixed-width-height-container {
+    max-width: 1200px; /* Adjust as needed */
+    max-height: 800px; /* Adjust as needed */
+    margin: 0 auto;
+  }
+
+  /* END REVIEWS */
+
+  /* START OF CTA */
+  /* Custom TailwindCSS styles */
+  .button-wrapper {
+    @apply relative;
+  }
+
+  .hover-button {
+    @apply text-lg font-bold text-gray-300 cursor-pointer relative bg-none border-none transition-colors duration-300 ease-[cubic-bezier(0.25,0.8,0.25,1)];
+  }
+
+  .hover-button:hover,
+  .hover-button:focus {
+    @apply text-white;
+  }
+
+  .hover-button::after {
+    content: "";
+    @apply absolute bottom-[-2px] left-1/2 w-0 h-[2px] bg-white transition-all duration-300 ease-[cubic-bezier(0.25,0.8,0.25,1)];
+  }
+
+  .hover-button:hover::after,
+  .hover-button:focus::after {
+    @apply w-full left-0;
+  }
+
+  /* END OF CTA */
+
+/*  CUSTOM CURSOR*/
+  .cursor {
+    background-color: rgba(255, 255, 255, 0.9); /* Soft white color */
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    position: fixed;
+    top: -10px;  /* Adjust to center */
+    left: -10px; /* Adjust to center */
+    pointer-events: none;
+    z-index: 9999;
+    transition: opacity 0.3s ease, transform 0.1s ease-out;
+    will-change: transform;
+
+    /* Glowing effect */
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.6), /* Cyan glow */
+    0 0 200px rgba(0, 255, 255, 0.4), /* Outer blur */
+    0 0 120px rgba(245, 245, 245, 0.96); /* Faint distant glow */
+
+    /* Optional: Add a blur effect for a soft glow */
+    backdrop-filter: blur(6px);
+  }
+
+  /* Effect for when the cursor hovers over interactive elements */
+  .cursor-hover {
+    transform: scale(1.5); /* Enlarges cursor on hover */
+    box-shadow: 0 0 50px rgba(0, 255, 255, 0.8),
+    0 0 100px rgba(0, 255, 255, 0.5),
+    0 0 150px rgba(0, 255, 255, 0.3);
+  }
+
+
+
+}
