@@ -55,7 +55,7 @@ export default function App() {
 
   return (
     <>
-      <div ref={cursorRef} className="cursor" />
+      <div ref={cursorRef} className="cursor max-md:hidden" />
       <Header />
       <main className="min-h-[calc(100vh-100px)] relative overflow-x-hidden">
         <Outlet />
