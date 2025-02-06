@@ -62,10 +62,10 @@ const MiniContactMe = ({ email, resumeUrl }) => {
         )}
       </div>
 
-      {/* Contact Info Button */}
-      <div className="button-wrapper" onClick={() => navigate("/contact")}>
-        <button className="hover-button">More Contact Info</button>
-      </div>
+      {/*/!* Contact Info Button *!/*/}
+      {/*<div className="button-wrapper" onClick={() => navigate("/contact")}>*/}
+      {/*  <button className="hover-button">More Contact Info</button>*/}
+      {/*</div>*/}
     </section>
   );
 };

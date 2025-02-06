@@ -4,6 +4,7 @@ import MiniContactMe from "../components/MiniContactMe";
 import { Element } from "react-scroll";
 import { motion } from "framer-motion";
 import { client } from "../client";
+import { LogoSlider } from "./index.jsx";
 
 const CallToAction = () => {
   const [resumeUrl, setResumeUrl] = useState(null);
@@ -22,7 +23,7 @@ const CallToAction = () => {
   const transition = { duration: 1, ease: [0.25, 0.1, 0.25, 1] };
 
   return (
-    <section className="relative z-0">
+    <section className="relative z-0 overflow-hidden">
       <Element name="cta">
         <motion.div
           whileInView={{ y: [100, 0], opacity: [0, 1] }}

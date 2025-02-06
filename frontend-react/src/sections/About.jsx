@@ -25,8 +25,8 @@ const About = () => {
         {/* Background SVG Container */}
         <div className="flex items-center justify-center z-0">
           <img
-            className="w-full h-[40%] absolute opacity-30 gradient-mask-r-70-d"
-            src="/assets/images/backgrounds/about-me-bg.svg"
+            className="w-full h-[40%] absolute mask-radial mask-shape-ellipse mask-reach-closest-corner"
+            src="/assets/images/backgrounds/about-back.png"
             alt="About-bg"
           />
           <CircleComponent />

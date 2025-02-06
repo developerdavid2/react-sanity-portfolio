@@ -22,22 +22,19 @@ const Hero = () => {
   };
 
   return (
-    <section className=" relative flex justify-center items-center lg:py-28 py-20 overflow-hidden border-b border-slate-800 rounded-b-[100px]">
+    <section className="relative flex justify-center items-center lg:py-28 py-20 overflow-hidden border-b border-slate-800 rounded-b-[100px]">
       <Element name="hero">
-        <Spotlight />
         <div className="container flex flex-col relative z-2 max-sm:px-0 mx-auto">
           {/* Decorations */}
           {/* Other content and decorations */}
-
-          {/*Shadow reflections*/}
+          <div className="blur-[8rem] h-28 w-28 bg-primary-300 absolute top-4 left-1/4" />
+          {/* Shadow reflections */}
           <div className="h-32 w-32 md:bg-dark-200/35 md:shadow-lg md:shadow-black/20 z-10 absolute top-3 right-[50%] blur-[2rem]" />
           <div className="h-32 w-32 md:bg-dark-200/35 md:shadow-lg shadow-black/20 z-10 absolute top-3 right-[28%] blur-[2rem] max-sm:hidden" />
 
-          {/*Glass Morphism*/}
+          {/* Glass Morphism */}
           <div className="h-6 w-6 md:h-12 md:w-12 bg-accent-200 blur-[1px] rounded-full absolute top-2 right-[18%]" />
           <div className="h-6 w-6 md:h-16 md:w-16 rounded-full bg-gray-800/10 shadow-lg shadow-black/20 backdrop-blur-sm border border-gray-300/30 z-10 absolute -top-2 right-[14%]" />
-
-          {/**/}
 
           {/* Content */}
           <div>
@@ -90,16 +87,10 @@ const Hero = () => {
                     whileInView={scaleVariants.whileInView}
                     className="absolute top-[40%] w-[600px] h-[600px] pointer-events-none before:absolute before:inset-0 before:bg-gradient-to-b before:from-indigo-500/25 before:via-indigo-500/5 before:via-25% before:to-indigo-500/0 before:to-75% before:rounded-full before:-z-50 max-sm:size-[400px]"
                   />
-                  <div className="gradient-mask-b-60 relative flex justify-center z-40 max-sm:gradient-mask-b-50">
-                    {/*<DotLottieReact*/}
-                    {/*  src="/assets/lottie/astro-dev.lottie"*/}
-                    {/*  loop*/}
-                    {/*  autoplay*/}
-                    {/*  className="w-[30rem] h-[30rem]" // Adjust width and height*/}
-                    {/*/>*/}
+                  <div className="gradient-mask-b-40 mask-linear mask-dir-to-b mask-via-40 relative flex justify-center z-40 max-sm:gradient-mask-b-50 overflow-visible w-[700px] h-[700px]">
                     <img
                       src="/assets/images/david-hero-shot.png"
-                      className="w-full h-full pt-20  object-cover transition-opacity duration-300 max-sm:p-[2.5rem_2.5rem_0_2.5rem]"
+                      className="w-[120%] h-[120%] object-cover transition-opacity duration-300 p-[8rem_8rem_0_8rem] max-sm:p-[2rem_2rem_0_2rem] "
                       alt="HeroImage"
                     />
                   </div>
@@ -110,12 +101,9 @@ const Hero = () => {
                   variants={scaleVariants}
                   whileInView={scaleVariants.whileInView}
                   transition={transition}
-                  className="max-md:pb-15 flex flex-wrap items-start lg:items-center gap-8 lg:gap-20 justify-center
-      lg:flex-col /* Large screens: flex-column */
-      max-md:flex-row /* Small screens: flex-row */
-      "
+                  className="max-md:pb-15 flex flex-wrap items-start lg:items-center gap-8 lg:gap-20 justify-center lg:flex-col max-md:flex-row"
                 >
-                  <div className="p-4 max-h-[80px] max-w-[80px] flex-center rounded-full shadow-lg bg-dark-400/30 border border-gray-300/30 max-sm:max-h-[60px] max-sm:max-w-[60px] ">
+                  <div className="p-4 max-h-[80px] max-w-[80px] flex-center rounded-full shadow-lg bg-dark-400/30 border border-gray-300/30 max-sm:max-h-[60px] max-sm:max-w-[60px]">
                     <motion.img
                       src="/assets/images/skills-stack/react.png"
                       alt="React"

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Element } from "react-scroll";
 import { motion } from "framer-motion";
 import { client, urlFor } from "../client";
+import CircleComponent from "../components/CircleComponent.jsx";
 
 const Skills = () => {
   const [skills, setSkills] = useState([]);
@@ -16,14 +17,17 @@ const Skills = () => {
   }, []);
   const transition = { duration: 1, ease: [0.25, 0.1, 0.25, 1] };
   return (
-    <section className="py-16 md:py-24  relative">
+    <section className="py-16 md:py-40  relative">
       <Element name="skills">
-        <div
-          className="absolute inset-0 bg-cover bg-center  mix-blend-hard-light opacity-10 gradient-mask-t-10"
-          style={{
-            backgroundImage: "url('/assets/images/backgrounds/stacks-bg.png')",
-          }}
-        />
+        <div className="blur-[10rem] h-40 w-40 bg-primary-300/50 absolute top-[10%] left-1/2 -translate-x-1/2 rounded-full -z-40" />
+        <div className="flex items-center justify-center z-0 mt-10">
+          <img
+            className="w-full h-[40%] absolute mask-radial mask-shape-ellipse mask-reach-closest-corner"
+            src="/assets/images/backgrounds/about-back.png"
+            alt="About-bg"
+          />
+          <CircleComponent />
+        </div>
         <motion.div
           whileInView={{ y: [100, 0], opacity: [0, 1] }}
           transition={transition}

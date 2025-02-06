@@ -138,6 +138,9 @@
   }
 
   /* START WORKS SECTION */
+  .mask-grid {
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+  }
   .work-tag {
     @apply bg-dark-500/30 shadow-lg shadow-black/20 backdrop-blur-md border border-zinc-500/10;
   }

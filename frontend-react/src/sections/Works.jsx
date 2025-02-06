@@ -39,7 +39,9 @@ const Works = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 max-sm:pt-10">
+    <section className="py-16 md:py-24 max-sm:pt-10 relative">
+      <div className="absolute inset-0 bg-grid-white/[0.03] w-full h-[40%] z-0 mask-radial mask-reach-closest-corner" />
+      <div className="blur-[10rem] h-40 w-40 bg-primary-300/50 absolute top-[10%] left-1/2 -translate-x-1/2 rounded-full -z-40" />
       <Element name="works">
         <motion.div
           whileInView={{ y: [100, 0], opacity: [0, 1] }}
