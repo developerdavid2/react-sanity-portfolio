@@ -6,4 +6,5 @@ export default defineConfig({
   build: {
     outDir: "dist", // Ensure build output goes into "dist"
   },
+  base: "/", // Set this to "/" if your app is deployed at the root
 });
