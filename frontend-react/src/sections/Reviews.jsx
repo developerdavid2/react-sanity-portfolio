@@ -37,7 +37,8 @@ const Reviews = () => {
           whileInView={{ opacity: [0, 1] }}
           transition={{ duration: 0.5, type: "tween" }}
         >
-          <div className="blur-[12rem] h-40 w-40 bg-accent-200 absolute top-[25%] left-1/2 -translate-x-1/2 rounded-full -z-40" />
+          <div className="blur-[10rem] h-40 w-40 bg-primary-300 absolute top-[25%] left-1/2 -translate-x-1/2 rounded-full -z-40" />
+          <div className="blur-[10rem] h-40 w-40 bg-primary-300 absolute top-[25%] left-1/2 -translate-x-1/2 rounded-full -z-40" />
 
           <div className="flex flex-col relative z-2 max-sm:px-0 mask-left-right gradient-mask-t-20 overflow-auto">
             {/* Section Title */}

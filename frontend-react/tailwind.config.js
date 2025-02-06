@@ -48,7 +48,7 @@ module.exports = {
       },
       backgroundImage: {
         "dark-gradient-0":
-          "linear-gradient(135deg, hsla(226, 26%, 16%, 1) 29%, hsla(0, 0%, 0%, 1) 100%)",
+          "linear-gradient(135deg, hsla(226, 26%, 10%, 1) 29%, hsla(0, 0%, 0%, 2) 100%)",
         "dark-gradient-1":
           "linear-gradient(135deg, hsla(218, 28%, 16%, 1) 13%, hsla(0, 0%, 6%, 1) 100%)",
         "dark-gradient-2":
@@ -59,6 +59,8 @@ module.exports = {
           "linear-gradient(to right, hsla(0, 0%, 18%, 1) 0%, hsla(0, 0%, 10%, 1) 50%, hsla(0, 0%, 12%, 1) 100%)",
         "dark-gradient-6":
           "radial-gradient(circle, hsla(176, 12%, 24%, 1) 16%, hsla(180, 10%, 6%, 1) 100%)",
+        "radial-gradient":
+          "radial-gradient(hsl(180, 100%, 80%), hsla(180, 100%, 80%, 0))",
       },
       fontFamily: {
         sans: [
@@ -118,6 +120,9 @@ module.exports = {
       animation: {
         border: "border 4s linear infinite",
         "infinite-scroll": "infinite-scroll 6s linear infinite",
+        "move-up": "move-up 10s linear infinite",
+        "fade-in": "fade-in 1s ease-in-out",
+        "scale-up": "scale-up 2s ease-in-out infinite",
       },
       keyframes: {
         infiniteSlider: {
@@ -132,6 +137,19 @@ module.exports = {
         },
         border: {
           to: { "--border-angle": "360deg" },
+        },
+        "move-up": {
+          "0%": { transform: "translateY(0)" },
+          "100%": { transform: "translateY(-100vh)" },
+        },
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        "scale-up": {
+          "0%": { transform: "scale(0.5)" },
+          "50%": { transform: "scale(1.2)" },
+          "100%": { transform: "scale(0.5)" },
         },
       },
     },

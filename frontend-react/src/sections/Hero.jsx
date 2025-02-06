@@ -1,6 +1,7 @@
 import { Element } from "react-scroll";
 import { motion } from "framer-motion";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { Spotlight } from "../components/ui/spotlight-new.jsx";
 
 const Hero = () => {
   const scaleVariants = {
@@ -21,13 +22,13 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative flex justify-center items-center lg:py-28 py-20 overflow-hidden border-b border-slate-800 rounded-b-[100px]">
+    <section className=" relative flex justify-center items-center lg:py-28 py-20 overflow-hidden border-b border-slate-800 rounded-b-[100px]">
       <Element name="hero">
+        <Spotlight />
         <div className="container flex flex-col relative z-2 max-sm:px-0 mx-auto">
           {/* Decorations */}
           {/* Other content and decorations */}
 
-          <div className="blur-[8rem] h-28 w-28 bg-accent-200 absolute top-4 left-1/4" />
           {/*Shadow reflections*/}
           <div className="h-32 w-32 md:bg-dark-200/35 md:shadow-lg md:shadow-black/20 z-10 absolute top-3 right-[50%] blur-[2rem]" />
           <div className="h-32 w-32 md:bg-dark-200/35 md:shadow-lg shadow-black/20 z-10 absolute top-3 right-[28%] blur-[2rem] max-sm:hidden" />
