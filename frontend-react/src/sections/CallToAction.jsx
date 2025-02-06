@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from "react";
 import MiniContactMe from "../components/MiniContactMe";
-import { SanityClient } from "@sanity/client";
+
 import { Element } from "react-scroll";
 import { motion } from "framer-motion";
+import { client } from "../client";
+
 const CallToAction = () => {
   const [resumeUrl, setResumeUrl] = useState(null);
 
-  // useEffect(() => {
-  //   SanityClient.fetch(`*[_type == "settings"][0]{resumeFile}`).then((data) =>
-  //     setResumeUrl(data.resumeFile.asset.url)
-  //   );
-  // }, []);
+  useEffect(() => {
+    client
+      .fetch(`*[_type == "resume"][0]{file{asset->{url}}}`)
+      .then((data) => {
+        if (data?.file?.asset?.url) {
+          setResumeUrl(data.file.asset.url);
+        }
+      })
+      .catch((error) => console.error("Error fetching resume:", error));
+  }, []);
 
   const transition = { duration: 1, ease: [0.25, 0.1, 0.25, 1] };
+
   return (
-    <section className="relative z-0 ">
+    <section className="relative z-0">
       <Element name="cta">
         <motion.div
           whileInView={{ y: [100, 0], opacity: [0, 1] }}
@@ -49,7 +57,7 @@ const CallToAction = () => {
             <div>
               <MiniContactMe
                 email="jacobsdavid.dr@gmail.com"
-                resumeUrl={resumeUrl}
+                resumeUrl={resumeUrl} // Pass fetched resume URL
               />
             </div>
           </div>

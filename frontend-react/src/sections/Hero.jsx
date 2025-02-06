@@ -97,8 +97,8 @@ const Hero = () => {
                     {/*  className="w-[30rem] h-[30rem]" // Adjust width and height*/}
                     {/*/>*/}
                     <img
-                      src="/assets/images/david-hero.png"
-                      className="w-full h-full pt-20 object-cover transition-opacity duration-300 max-sm:p-[2.5rem_2.5rem_0_2.5rem]"
+                      src="/assets/images/david-hero-shot.png"
+                      className="w-full h-full pt-20  object-cover transition-opacity duration-300 max-sm:p-[2.5rem_2.5rem_0_2.5rem]"
                       alt="HeroImage"
                     />
                   </div>

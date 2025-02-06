@@ -34,8 +34,8 @@ export default function App() {
 
     const animate = () => {
       // Linear interpolation for smooth movement
-      currentX.current += (targetX.current - currentX.current) * 0.2;
-      currentY.current += (targetY.current - currentY.current) * 0.2;
+      currentX.current += (targetX.current - currentX.current) * 0.5;
+      currentY.current += (targetY.current - currentY.current) * 0.5;
 
       if (cursorRef.current) {
         cursorRef.current.style.transform = `translate3d(${currentX.current}px, ${currentY.current}px, 0)`;
