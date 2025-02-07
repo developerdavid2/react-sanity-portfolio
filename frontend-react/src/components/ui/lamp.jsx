@@ -1,25 +1,64 @@
 "use client";
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
+import { motion, useAnimation } from "framer-motion";
 import { cn } from "../../lib/utils.js";
 
 export const LampContainer = ({ children, className }) => {
+  const controls = useAnimation();
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          controls.start("visible");
+          setHasAnimated(true);
+        }
+      },
+      {
+        root: null, // Defaults to the browser viewport
+        rootMargin: "0px",
+        threshold: 0.5, // Adjust as needed
+      },
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, [controls, hasAnimated]);
+
+  const variants = {
+    hidden: { opacity: 0.5, width: "15rem" },
+    visible: { opacity: 1, width: "30rem" },
+  };
+
+  const transition = {
+    delay: 0.3,
+    duration: 0.8,
+    ease: "easeInOut",
+  };
+
   return (
     <div
       className={cn(
         "relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-slate-950 w-full rounded-md z-0",
         className,
       )}
+      ref={containerRef} // Add ref here
     >
       <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 ">
         <motion.div
-          initial={{ opacity: 0.5, width: "15rem" }}
-          whileInView={{ opacity: 1, width: "30rem" }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: "easeInOut",
-          }}
+          variants={variants}
+          initial="hidden"
+          animate={controls}
+          transition={transition}
           style={{
             backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
           }}
@@ -29,13 +68,10 @@ export const LampContainer = ({ children, className }) => {
           <div className="absolute  w-40 h-[100%] left-0 bg-slate-950  bottom-0 z-20 [mask-image:linear-gradient(to_right,white,transparent)]" />
         </motion.div>
         <motion.div
-          initial={{ opacity: 0.5, width: "15rem" }}
-          whileInView={{ opacity: 1, width: "30rem" }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: "easeInOut",
-          }}
+          variants={variants}
+          initial="hidden"
+          animate={controls}
+          transition={transition}
           style={{
             backgroundImage: `conic-gradient(var(--conic-position), var(--tw-gradient-stops))`,
           }}
