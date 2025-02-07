@@ -1,7 +1,5 @@
 import { Element } from "react-scroll";
 import { motion } from "framer-motion";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { Spotlight } from "../components/ui/spotlight-new.jsx";
 
 const Hero = () => {
   const scaleVariants = {
@@ -22,7 +20,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative flex justify-center items-center lg:py-28 py-20 overflow-hidden border-b border-slate-800 rounded-b-[100px]">
+    <section className="relative flex justify-center items-center lg:py-28 py-20 overflow-hidden border-b border-slate-800 rounded-b-[100px] max-sm:border-0">
       <Element name="hero">
         <div className="container flex flex-col relative z-2 max-sm:px-0 mx-auto">
           {/* Decorations */}
@@ -85,12 +83,12 @@ const Hero = () => {
                   <motion.div
                     variants={scaleVariants}
                     whileInView={scaleVariants.whileInView}
-                    className="absolute top-[40%] w-[600px] h-[600px] pointer-events-none before:absolute before:inset-0 before:bg-gradient-to-b before:from-indigo-500/25 before:via-indigo-500/5 before:via-25% before:to-indigo-500/0 before:to-75% before:rounded-full before:-z-50 max-sm:size-[400px]"
+                    className="absolute top-[40%] max-sm:top-[30%] w-[600px] h-[600px] pointer-events-none before:absolute before:inset-0 before:bg-gradient-to-b before:from-indigo-500/25 before:via-indigo-500/5 before:via-25% before:to-indigo-500/0 before:to-75% before:rounded-full before:-z-50 max-sm:size-[400px]"
                   />
-                  <div className="gradient-mask-b-40 mask-linear mask-dir-to-b mask-via-40 relative flex justify-center z-40 max-sm:gradient-mask-b-50 overflow-visible w-[700px] h-[700px] max-sm:h-[600px]">
+                  <div className="gradient-mask-b-40 relative flex justify-center z-40 max-sm:gradient-mask-b-30 overflow-visible w-[700px] h-[700px] max-sm:h-[400px]">
                     <img
                       src="/assets/images/david-hero-shot.png"
-                      className="w-[120%] h-[120%] object-cover transition-opacity duration-300 p-[8rem_8rem_0_8rem] max-sm:p-[12rem] max-sm:pt-0 max-sm:absolute max-sm:top-[20%]"
+                      className="w-[120%] h-[120%] object-cover transition-opacity duration-300 p-[8rem_8rem_0_8rem]  max-sm:h-auto max-sm:p-[12rem] max-sm:pt-0 max-sm:absolute max-sm:top-[10%] max-sm:gradient-mask-b-30"
                       alt="HeroImage"
                     />
                   </div>

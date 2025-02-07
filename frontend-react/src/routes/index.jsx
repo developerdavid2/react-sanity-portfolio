@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
 import App from "../App.jsx";
-import HomePage from "../pages/HomePage.jsx";
+
 import ProjectDetailsPage from "../pages/ProjectDetailsPage.jsx";
 import ContactPage from "../pages/ContactPage.jsx";
 
+const HomePage = lazy(() => import("../pages/HomePage.jsx"));
 const router = createBrowserRouter([
   {
     path: "/",

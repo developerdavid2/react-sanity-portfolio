@@ -57,7 +57,7 @@ const CallToAction = () => {
 
             <div>
               <MiniContactMe
-                email="jacobsdavid.dr@gmail.com"
+                email="hellojacobsdavid@gmail.com"
                 resumeUrl={resumeUrl} // Pass fetched resume URL
               />
             </div>
