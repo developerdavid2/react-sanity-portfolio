@@ -1,7 +1,10 @@
 import Header from "./sections/Header.jsx";
 import Footer from "./sections/Footer.jsx";
 import { Outlet } from "react-router";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import LoadingScreen from "./components/LoadingScreen.jsx";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes/index.jsx";
 
 export default function App() {
   const cursorRef = useRef(null);
@@ -53,14 +56,31 @@ export default function App() {
     };
   }, []);
 
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 5000); // 5 seconds delay
+
+    return () => clearTimeout(timer); // Cleanup the timer on component unmount
+  }, []);
+
   return (
     <>
       <div ref={cursorRef} className="cursor max-md:hidden" />
-      <Header />
-      <main className="min-h-[calc(100vh-100px)] relative overflow-x-hidden">
-        <Outlet />
-      </main>
-      <Footer />
+
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <>
+          <Header />
+          <main className="min-h-[calc(100vh-100px)] relative overflow-x-hidden">
+            <Outlet />
+          </main>
+          <Footer />
+        </>
+      )}
     </>
   );
 }
