@@ -51,7 +51,7 @@ const NavigationMobileMenu = () => {
                   i === active ? "-mt-6 text-white" : "text-gray-400"
                 }`}
               >
-                <ion-icon name={menu.icon}></ion-icon>
+                {menu.icon}
               </span>
               {/* Title */}
               <span

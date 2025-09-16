@@ -6,35 +6,35 @@ export const sections = [
   {
     title: "Home",
     slug: "hero",
-    icon: "home-outline",
+    icon: <FiHome />,
     dis: "translate-x-0",
     component: Hero, // Specific component for About section
   },
   {
     title: "About",
     slug: "about",
-    icon: "person-outline",
+    icon: <FiUser />,
     dis: "translate-x-16",
     component: About, // Specific component for About section
   },
   {
     title: "Works",
     slug: "works",
-    icon: "briefcase-outline",
+    icon: <FiGrid />,
     dis: "translate-x-32",
     component: Works,
   },
   {
     title: "Skills",
     slug: "skills",
-    icon: "construct-outline",
+    icon: <FiTool />,
     dis: "translate-x-48",
     component: Skills,
   },
   {
     title: "Reviews",
     slug: "reviews",
-    icon: "chatbubbles-outline",
+    icon: <FiPenTool />,
     dis: "translate-x-64",
     component: Reviews,
   },

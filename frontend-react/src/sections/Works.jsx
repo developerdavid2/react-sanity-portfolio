@@ -10,18 +10,36 @@ const Works = () => {
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
   const [filteredWorks, setFilteredWorks] = useState([]);
   const [works, setWorks] = useState([]);
-  const [hoveredIndex, setHoveredIndex] = useState(null); // Track hovered item
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [imageLoadingStates, setImageLoadingStates] = useState({}); // Track loading state for each image
 
   useEffect(() => {
     const fetchData = async () => {
       const query = '*[_type == "works"]';
       const data = await client.fetch(query);
       setWorks(data);
-      setFilteredWorks(data); // Save fetched data in state
+      setFilteredWorks(data);
+
+      // Initialize loading states for all images
+      const initialLoadingStates = {};
+      data.forEach((_, index) => {
+        initialLoadingStates[index] = true;
+      });
+      setImageLoadingStates(initialLoadingStates);
     };
     fetchData();
   }, []);
+
   const transition = { duration: 1, ease: [0.25, 0.1, 0.25, 1] };
+
+  // Handle image load completion
+  const handleImageLoad = (index) => {
+    setImageLoadingStates((prev) => ({
+      ...prev,
+      [index]: false,
+    }));
+  };
+
   // Filter works by tag
   const handleFilter = (item) => {
     setActiveFilter(item);
@@ -35,8 +53,30 @@ const Works = () => {
       } else {
         setFilteredWorks(works.filter((work) => work.tags.includes(item)));
       }
+
+      // Reset loading states for filtered works
+      const newLoadingStates = {};
+      const filtered =
+        item === "All"
+          ? works
+          : works.filter((work) => work.tags.includes(item));
+      filtered.forEach((_, index) => {
+        newLoadingStates[index] = true;
+      });
+      setImageLoadingStates(newLoadingStates);
     }, 500);
   };
+
+  // Skeleton component
+  const ImageSkeleton = () => (
+    <div className="w-[90%] md:w-[80%] h-auto aspect-[4/3] overflow-hidden object-cover mx-auto rounded-xl relative z-10 bg-gray-800 animate-pulse">
+      <div className="w-full h-full bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-[length:200%_100%] animate-shimmer">
+        <div className="flex items-center justify-center h-full">
+          <div className="w-12 h-12 border-2 border-gray-600 border-t-gray-400 rounded-full animate-spin"></div>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <section className="py-16 md:py-24 max-sm:pt-10 relative">
@@ -109,26 +149,44 @@ const Works = () => {
                   {/* Work Image */}
                   <div className="relative w-full h-[400px] mb-4 rounded-xl overflow-hidden group ">
                     <div className="h-[80%] overflow-hidden rounded-xl">
+                      {/* Skeleton placeholder */}
+                      {imageLoadingStates[index] && <ImageSkeleton />}
+
+                      {/* Actual image */}
                       <motion.img
                         src={urlFor(work.imgUrl)}
                         alt={work.title}
-                        className=" w-[90%] md:w-[80%] h-auto overflow-hidden object-cover mx-auto rounded-xl relative z-10 "
+                        className={`w-[90%] md:w-[80%] h-auto overflow-hidden object-cover mx-auto rounded-xl relative z-10 transition-opacity duration-300 ${
+                          imageLoadingStates[index]
+                            ? "opacity-0 absolute"
+                            : "opacity-100"
+                        }`}
                         animate={
-                          hoveredIndex === index
+                          hoveredIndex === index && !imageLoadingStates[index]
                             ? { y: ["0%", "-10%"] }
                             : { y: "0%" }
                         }
                         transition={{ duration: 3 }}
+                        loading="lazy"
+                        onLoad={() => handleImageLoad(index)}
+                        onError={() => handleImageLoad(index)} // Also hide skeleton on error
                       />
                     </div>
 
                     {/*Hover Overlay*/}
                     <motion.div
                       initial={{ opacity: 0 }}
-                      animate={{ opacity: hoveredIndex === index ? 1 : 0 }} // Controlled by hover state
+                      animate={{
+                        opacity:
+                          hoveredIndex === index && !imageLoadingStates[index]
+                            ? 1
+                            : 0,
+                      }}
                       transition={{ duration: 0.3 }}
                       className={`w-[90%] md:w-[80%] h-[80%] mx-auto absolute inset-0 bg-black/50 flex items-center justify-center rounded-xl transition-all z-20 overflow-hidden  ${
-                        hoveredIndex === index ? "opacity-100" : "opacity-0"
+                        hoveredIndex === index && !imageLoadingStates[index]
+                          ? "opacity-100"
+                          : "opacity-0"
                       }`}
                     >
                       <a
