@@ -9,7 +9,7 @@
 ## 🔥 **Preview**
 
 <p align="center">
-  <img src="./resources/hero-prev.png" width="400" />&nbsp;
+ &nbsp;
   <img src="./resources/works-prev.png" width="400" />
 </p>
 <p align="center">
