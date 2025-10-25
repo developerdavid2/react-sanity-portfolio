@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { sections } from "../constants";
 import { Link as ScrollLink } from "react-scroll";
 
@@ -48,7 +48,9 @@ const NavigationMobileMenu = () => {
               {/* Icon */}
               <span
                 className={`text-xl duration-300 ${
-                  i === active ? "-mt-6 text-white" : "text-gray-400"
+                  i === active
+                    ? "-mt-6 text-white mx-auto z-30"
+                    : "text-gray-400 mx-auto"
                 }`}
               >
                 {menu.icon}
@@ -57,7 +59,7 @@ const NavigationMobileMenu = () => {
               <span
                 className={`duration-700 ${
                   i === active
-                    ? "translate-y-4 opacity-100 text-sm"
+                    ? "translate-y-4 opacity-100 text-sm mt-2"
                     : "opacity-0 translate-y-10 text-transparent"
                 }`}
               >

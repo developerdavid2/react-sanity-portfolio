@@ -1,7 +1,6 @@
-import { useRef, useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import { Link as RouterLink } from "react-router-dom";
-import { motion } from "framer-motion";
 import { useNavProvider } from "../contexts/NavProvider.jsx";
 import clsx from "clsx";
 
