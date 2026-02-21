@@ -75,13 +75,6 @@ const About = React.memo(function About() {
   return (
     <section className="relative overflow-hidden bg-[#0a0a0a]">
       <Element name="about">
-        <AmbientBeam
-          color="#6366f1"
-          opacity={0.04}
-          position={{ top: "-120px", right: "-120px" }}
-          className="hidden sm:block"
-        />
-
         <div className="relative z-10 px-5 sm:px-12 md:px-16 lg:px-20 py-14 md:py-20 flex flex-col gap-y-16">
           {/* TOP GRID — intro + stats */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
@@ -249,33 +242,31 @@ const About = React.memo(function About() {
                         : "0 1px 0 0 rgba(255,255,255,0.6) inset, 0 -1px 0 0 rgba(0,0,0,0.15) inset, 0 8px 32px rgba(0,0,0,0.15)",
                 }}
               >
-                {/* AI card — geometric design instead of image */}
+                {/* AI card — replace the geometric div with this */}
                 {index === 0 && (
                   <div
-                    className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none"
+                    className="absolute top-0 bottom-0 right-0 overflow-hidden rounded-2xl pointer-events-none w-[50%]"
                     aria-hidden
                   >
-                    {/* Concentric rings */}
-                    <div className="absolute right-[-60px] top-[-60px] w-[300px] h-[300px] rounded-full border border-white/[0.04]" />
-                    <div className="absolute right-[-30px] top-[-30px] w-[220px] h-[220px] rounded-full border border-white/[0.06]" />
-                    <div className="absolute right-[10px] top-[10px] w-[140px] h-[140px] rounded-full border border-white/[0.08]" />
-                    {/* Glow dot */}
+                    {/* AI robot image — right-aligned, fades out left */}
+                    <div className="scale-150 size-full">
+                      <img
+                        src="/assets/images/ai-powered.png"
+                        alt="AI  Image"
+                        className="lg:flex hidden absolute left-20 top-10 h-full w-full object-contain size-[120%]"
+                      />
+                    </div>
+
+                    {/* Extra gradient fade on the left so text stays readable */}
                     <div
-                      className="absolute right-[60px] top-[60px] w-[40px] h-[40px] rounded-full blur-[20px]"
-                      style={{ background: "rgba(99,102,241,0.6)" }}
-                    />
-                    {/* Grid dots */}
-                    <div
-                      className="absolute inset-0 opacity-[0.04]"
+                      className="absolute inset-0"
                       style={{
-                        backgroundImage:
-                          "radial-gradient(circle, #fff 1px, transparent 1px)",
-                        backgroundSize: "28px 28px",
+                        background:
+                          "linear-gradient(to right, #111 35%, transparent 70%)",
                       }}
                     />
                   </div>
                 )}
-
                 <div className="relative z-10">
                   {/* Title — large and bold */}
                   <h3
@@ -306,19 +297,19 @@ const About = React.memo(function About() {
                       </span>
                     ))}
                   </div>
-                </div>
 
-                {/* Description — pushed to bottom */}
-                <p
-                  className={[
-                    "relative z-10 mt-6 text-[14px] lg:text-[15px] leading-relaxed",
-                    sol.variant === "lime" || sol.variant === "light"
-                      ? "text-black/70"
-                      : "text-[#888]",
-                  ].join(" ")}
-                >
-                  {sol.description}
-                </p>
+                  {/* Description — pushed to bottom */}
+                  <p
+                    className={[
+                      "relative z-10 mt-6 text-[14px] lg:text-[15px] leading-relaxed max-w-md xl:max-w-xl",
+                      sol.variant === "lime" || sol.variant === "light"
+                        ? "text-black/70"
+                        : "text-[#888]",
+                    ].join(" ")}
+                  >
+                    {sol.description}
+                  </p>
+                </div>
               </Reveal>
             ))}
           </motion.div>

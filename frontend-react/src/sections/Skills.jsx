@@ -37,22 +37,21 @@ const SCROLL_LINE_2 =
 const Skills = React.memo(function Skills() {
   return (
     <section className="relative bg-[#0a0a0a] overflow-hidden">
+      <AmbientBeam
+        color="#717171"
+        opacity={0.06}
+        position={{ top: "30px", right: "50%" }}
+        className="hidden sm:block translate-x-1/2"
+      />
       <Element name="skills">
-        <AmbientBeam
-          color="#6366f1"
-          opacity={0.03}
-          position={{ bottom: "-140px", left: "-140px" }}
-          className="hidden sm:block"
-        />
-
         <div
-          className="absolute inset-0 pointer-events-none select-none overflow-hidden flex items-center justify-center"
+          className="absolute top-0 right-20 pointer-events-none select-none overflow-hidden flex items-center justify-center"
           aria-hidden
         >
           <div
             className="text-[clamp(80px,18vw,220px)] font-black text-transparent whitespace-nowrap"
             style={{
-              WebkitTextStroke: "1px rgba(255,255,255,0.04)",
+              WebkitTextStroke: "1.5px rgba(255,255,255,0.04)",
               letterSpacing: "-0.04em",
             }}
           >
