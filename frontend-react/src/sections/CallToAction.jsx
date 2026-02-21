@@ -1,12 +1,14 @@
+// CallToAction.jsx
 import React, { useEffect, useState } from "react";
-import MiniContactMe from "../components/MiniContactMe";
-
 import { Element } from "react-scroll";
 import { motion } from "framer-motion";
 import { client } from "../client";
-import { LogoSlider } from "./index.jsx";
+import AmbientBeam from "../components/AmbientBeam.jsx";
+import Reveal from "../components/Reveal.jsx";
+import { containerVariants } from "../hooks/useRevealAnimation.js";
 
-const CallToAction = () => {
+const CallToAction = React.memo(function CallToAction() {
+  const email = "hellojacobsdavid@gmail.com";
   const [resumeUrl, setResumeUrl] = useState(null);
 
   useEffect(() => {
@@ -20,52 +22,131 @@ const CallToAction = () => {
       .catch((error) => console.error("Error fetching resume:", error));
   }, []);
 
-  const transition = { duration: 1, ease: [0.25, 0.1, 0.25, 1] };
-
   return (
-    <section className="relative z-0 overflow-hidden">
+    <section className="relative min-h-screen bg-[#0f0f0f] overflow-hidden flex items-center justify-center">
       <Element name="cta">
-        <motion.div
-          whileInView={{ y: [100, 0], opacity: [0, 1] }}
-          transition={transition}
-          initial="hidden"
-        >
-          <div className="w-full max-w-5xl mx-auto px-4 md:px-6 py-48 max-sm:py-24 flex flex-col">
-            <div className="text-center">
-              <a
-                className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-6 items-center justify-center text-3xl sm:text-4xl md:text-5xl font-semibold text-slate-900 before:absolute before:inset-0 hover:before:bg-dark-gradient-0 before:-z-10 before:transition-colors before:duration-500 group"
-                href="#"
+        <div className="relative z-10 w-full px-5 sm:px-12 md:px-16 lg:px-20 py-14 md:py-20">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <Reveal className="text-[11px] tracking-[0.2em] uppercase text-[#555]">
+              05 / CONTACT
+            </Reveal>
+
+            <div className="mt-4">
+              <Reveal
+                as={motion.h2}
+                className="text-white font-black leading-[0.9] text-[clamp(64px,10vw,160px)]"
+                style={{ letterSpacing: "-0.04em" }}
               >
-                <span className="relative p-0.5 rounded-full bg-slate-200 group-hover:bg-slate-800 transition duration-500 overflow-hidden flex items-center justify-center before:opacity-0 group-hover:before:opacity-100 before:absolute before:w-1/2 before:pb-[100%] before:bg-[linear-gradient(90deg,_theme(colors.indigo.500/0)_0%,_theme(colors.indigo.500)_35%,_theme(colors.indigo.200)_50%,_theme(colors.indigo.500)_65%,_theme(colors.indigo.500/0)_100%)] before:animate-[spin_3s_linear_infinite]">
-                  <span className="relative whitespace-nowrap">
-                    <span className="block px-8 py-6 rounded-full bg-gradient-to-r from-slate-200 to-slate-100 z-10 group-hover:opacity-0 transition-opacity duration-500 ease-in-out max-sm:text-2xl">
-                      Build the App you need
-                    </span>
+                LET&apos;S
+              </Reveal>
+              <Reveal
+                as={motion.h2}
+                delay={0.1}
+                className="font-black leading-[0.9] text-[clamp(64px,10vw,160px)]"
+                style={{ letterSpacing: "-0.04em", color: "#a3e635" }}
+              >
+                WORK
+              </Reveal>
+            </div>
 
-                    <span
-                      className="absolute inset-0 rounded-full bg-gradient-to-r from-slate-900 to-slate-800 z-10 inline-flex items-center whitespace-nowrap overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500 before:bg-clip-text before:text-transparent before:bg-gradient-to-r before:from-indigo-500 before:to-indigo-300 after:bg-clip-text after:text-transparent after:bg-gradient-to-r after:from-indigo-500 after:to-indigo-300 before:content-['Create_beautiful_user_interfaces'] after:content-['Create_beautiful_user_interfaces'] before:px-2 after:px-2 before:animate-infinite-scroll after:animate-infinite-scroll max-sm:text-2xl"
-                      aria-hidden="true"
-                    ></span>
-                  </span>
-                </span>
+            <Reveal className="mt-6 text-[16px] text-[#666]">
+              Have a project in mind? I&apos;d love to hear about it.
+            </Reveal>
 
-                <span className=" text-light-400 group-hover:text-slate-300 transition-colors duration-500 ease-in-out max-sm:text-2xl">
-                  with David
-                </span>
+            <Reveal className="mt-10">
+              <a
+                href={`mailto:${email}`}
+                data-cursor="hover"
+                className="inline-block text-white text-[clamp(18px,3vw,32px)] underline underline-offset-8 decoration-white/20 transition-all hover:decoration-white/60 hover:[text-shadow:0_0_24px_rgba(255,255,255,0.18)]"
+              >
+                {email}
               </a>
-            </div>
+            </Reveal>
 
-            <div>
-              <MiniContactMe
-                email="hellojacobsdavid@gmail.com"
-                resumeUrl={resumeUrl} // Pass fetched resume URL
-              />
-            </div>
-          </div>
-        </motion.div>
+            {/* CTA Buttons — neumorphic bezel style */}
+            <Reveal className="mt-10 flex items-center justify-center gap-4 flex-wrap">
+              <a
+                href={`mailto:${email}`}
+                data-cursor="hover"
+                className="
+                  inline-flex items-center gap-2 px-7 py-3.5 rounded-full
+                  text-[13px] font-medium text-white tracking-wide
+                  bg-[#141414]
+                  border border-white/[0.06]
+                  shadow-[0_1px_0_0_rgba(255,255,255,0.04)_inset,0_-1px_0_0_rgba(0,0,0,0.5)_inset,0_4px_16px_rgba(0,0,0,0.4)]
+                  hover:shadow-[0_1px_0_0_rgba(255,255,255,0.07)_inset,0_-1px_0_0_rgba(0,0,0,0.5)_inset,0_4px_20px_rgba(0,0,0,0.5)]
+                  hover:bg-[#181818]
+                  transition-all duration-300
+                "
+              >
+                Start a Project
+              </a>
+
+              {resumeUrl && (
+                <a
+                  href={resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-cursor="hover"
+                  className="
+                    inline-flex items-center gap-2 px-7 py-3.5 rounded-full
+                    text-[13px] font-medium text-[#888] tracking-wide
+                    bg-transparent
+                    border border-white/[0.06]
+                    shadow-[0_1px_0_0_rgba(255,255,255,0.03)_inset,0_-1px_0_0_rgba(0,0,0,0.4)_inset,0_2px_8px_rgba(0,0,0,0.3)]
+                    hover:text-white hover:border-white/[0.1]
+                    hover:shadow-[0_1px_0_0_rgba(255,255,255,0.06)_inset,0_-1px_0_0_rgba(0,0,0,0.4)_inset,0_4px_16px_rgba(0,0,0,0.4)]
+                    transition-all duration-300
+                  "
+                >
+                  Download Résumé ↓
+                </a>
+              )}
+            </Reveal>
+
+            {/* Social links */}
+            <Reveal className="mt-10 flex items-center justify-center gap-4 text-[12px] text-[#444]">
+              <a
+                href="https://github.com/developerdavid2"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="hover"
+                className="hover:text-[#888] transition-colors duration-200"
+              >
+                Github
+              </a>
+              <span className="text-[#2a2a2a]">·</span>
+              <a
+                href="https://www.linkedin.com/in/thejacobsdavid/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="hover"
+                className="hover:text-[#888] transition-colors duration-200"
+              >
+                LinkedIn
+              </a>
+              <span className="text-[#2a2a2a]">·</span>
+              <a
+                href="https://x.com/thejacobscodes"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="hover"
+                className="hover:text-[#888] transition-colors duration-200"
+              >
+                X
+              </a>
+            </Reveal>
+          </motion.div>
+        </div>
       </Element>
     </section>
   );
-};
+});
 
 export default CallToAction;

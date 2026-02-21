@@ -1,233 +1,190 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Element } from "react-scroll";
 import { motion } from "framer-motion";
-import { FaEye, FaGithub } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+import { FiArrowUpRight } from "react-icons/fi";
 import { client, urlFor } from "../client";
-import { BackgroundBeams } from "../components/ui/background-beams.jsx";
+import Reveal from "../components/Reveal.jsx";
+import { containerVariants } from "../hooks/useRevealAnimation.js";
 
-const Works = () => {
-  const [activeFilter, setActiveFilter] = useState("All");
-  const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
-  const [filteredWorks, setFilteredWorks] = useState([]);
+const Works = React.memo(function Works() {
   const [works, setWorks] = useState([]);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [imageLoadingStates, setImageLoadingStates] = useState({}); // Track loading state for each image
 
   useEffect(() => {
     const fetchData = async () => {
       const query = '*[_type == "works"]';
       const data = await client.fetch(query);
       setWorks(data);
-      setFilteredWorks(data);
-
-      // Initialize loading states for all images
-      const initialLoadingStates = {};
-      data.forEach((_, index) => {
-        initialLoadingStates[index] = true;
-      });
-      setImageLoadingStates(initialLoadingStates);
     };
     fetchData();
   }, []);
 
-  const transition = { duration: 1, ease: [0.25, 0.1, 0.25, 1] };
+  const formatIndex = (i) => String(i + 1).padStart(2, "0");
 
-  // Handle image load completion
-  const handleImageLoad = (index) => {
-    setImageLoadingStates((prev) => ({
-      ...prev,
-      [index]: false,
-    }));
-  };
+  const IMAGE_HEIGHT = 320;
 
-  // Filter works by tag
-  const handleFilter = (item) => {
-    setActiveFilter(item);
-    setAnimateCard([{ y: 100, opacity: 0 }]);
+  const ProjectCard = ({ work, index }) => {
+    const img = work?.imgUrl ? urlFor(work.imgUrl) : null;
+    const tags = Array.isArray(work?.tags) ? work.tags : [];
 
-    setTimeout(() => {
-      setAnimateCard([{ y: 0, opacity: 1 }]);
+    return (
+      <div
+        data-cursor="card"
+        data-cursor-text="VIEW"
+        className="group flex flex-col rounded-[20px] bg-[#111] border border-[#1a1a1a] overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:-translate-y-1 hover:border-[#2a2a2a]"
+      >
+        {/* Fixed-height image container: image scrolls on hover */}
+        <div
+          className="relative w-full overflow-hidden bg-[#0d0d0d]"
+          style={{ height: IMAGE_HEIGHT }}
+        >
+          {img ? (
+            <>
+              <img
+                src={img}
+                alt={work?.title || "Project screenshot"}
+                width={800}
+                height={500}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 w-full h-[140%] min-h-full object-cover object-top transition-transform duration-500 ease-out group-hover:translate-y-[-20%]"
+              />
+              <div
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#111] via-transparent to-transparent opacity-80"
+                aria-hidden
+              />
+            </>
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center text-[#333] text-sm">
+              No image
+            </div>
+          )}
+          <div className="absolute top-3 left-3 text-[11px] tracking-[0.2em] uppercase text-[#333]">
+            {formatIndex(index)}
+          </div>
+          <div className="absolute top-3 right-3">
+            <FiArrowUpRight className="text-white/70 transition-transform duration-300 group-hover:rotate-45" />
+          </div>
+        </div>
 
-      if (item === "All") {
-        setFilteredWorks(works);
-      } else {
-        setFilteredWorks(works.filter((work) => work.tags.includes(item)));
-      }
+        <div className="flex flex-col flex-1 p-5">
+          <h3
+            className="text-white font-semibold tracking-tight text-[clamp(18px,2vw,24px)]"
+            style={{ letterSpacing: "-0.02em" }}
+          >
+            {work?.title}
+          </h3>
 
-      // Reset loading states for filtered works
-      const newLoadingStates = {};
-      const filtered =
-        item === "All"
-          ? works
-          : works.filter((work) => work.tags.includes(item));
-      filtered.forEach((_, index) => {
-        newLoadingStates[index] = true;
-      });
-      setImageLoadingStates(newLoadingStates);
-    }, 500);
-  };
+          {tags.length ? (
+            <div className="mt-2 flex flex-wrap gap-2">
+              {tags.slice(0, 4).map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full bg-[#1a1a1a] px-2.5 py-0.5 text-[11px] text-[#666]"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          ) : null}
 
-  // Skeleton component
-  const ImageSkeleton = () => (
-    <div className="w-[90%] md:w-[80%] h-auto aspect-[4/3] overflow-hidden object-cover mx-auto rounded-xl relative z-10 bg-gray-800 animate-pulse">
-      <div className="w-full h-full bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-[length:200%_100%] animate-shimmer">
-        <div className="flex items-center justify-center h-full">
-          <div className="w-12 h-12 border-2 border-gray-600 border-t-gray-400 rounded-full animate-spin"></div>
+          {work?.description ? (
+            <p className="mt-2 text-[13px] leading-relaxed text-[#888]">
+              {work.description}
+            </p>
+          ) : null}
+
+          <div className="mt-4 flex flex-wrap items-center gap-4 text-[12px] text-[#555]">
+            {work?.projectLink ? (
+              <a
+                href={work.projectLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="hover"
+                className="hover:text-white transition-colors"
+              >
+                View live <span aria-hidden>↗</span>
+              </a>
+            ) : null}
+            {work?.codeLink ? (
+              <a
+                href={work.codeLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="hover"
+                className="inline-flex items-center gap-2 hover:text-white transition-colors"
+              >
+                <FaGithub className="text-[#444]" />
+                Code <span aria-hidden>↗</span>
+              </a>
+            ) : null}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
-    <section className="py-16 md:py-24 max-sm:pt-10 relative">
-      <div className="absolute inset-0 bg-grid-white/[0.03] w-full h-[40%] z-0 mask-radial mask-reach-closest-corner" />
-      <div className="blur-[10rem] h-40 w-40 bg-primary-300/50 absolute top-[10%] left-1/2 -translate-x-1/2 rounded-full -z-40" />
+    <section className="relative bg-[#0a0a0a] overflow-hidden">
       <Element name="works">
-        <motion.div
-          whileInView={{ y: [100, 0], opacity: [0, 1] }}
-          transition={transition}
-          initial="hidden"
-        >
-          <div className="container mx-auto px-4 md:px-8 max-md:max-w-3xl">
-            <div className="flex flex-col justify-center items-center text-center">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                className="[background:linear-gradient(45deg,#172033,theme(colors.slate.800)_50%,#172033)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.gray.500)_86%,_theme(colors.gray.300)_90%,_theme(colors.gray.500)_94%,_theme(colors.slate.600/.48))_border-box] rounded-full border border-transparent animate-border text-base capitalize inline-flex justify-center whitespace-nowrap font-medium bg-dark-400/30 backdrop-blur-[5rem] px-2 py-1 w-fit text-center"
-              >
-                Selected Works
-              </motion.div>
+        <div className="relative z-10 px-5 sm:px-12 md:px-16 lg:px-20 py-14 md:py-20">
+          <div className="relative">
+            <Reveal className="absolute right-0 top-0 text-[11px] tracking-[0.2em] uppercase text-[#555] hidden sm:block">
+              02
+            </Reveal>
 
-              <motion.h2
-                initial="hidden"
-                whileInView="visible"
-                className="text-2xl text-light-700 md:text-5xl font-bold bg-clip-text mt-4"
-              >
-                Crafted Creations
-              </motion.h2>
-
-              <motion.p
-                initial="hidden"
-                whileInView="visible"
-                className="text-base md:text-lg mt-4 text-gray-400 md:max-w-xl mx-auto text-center"
-              >
-                A curated collection of projects built with precision, passion,
-                and purpose.
-              </motion.p>
-            </div>
-
-            {/* Filter Buttons */}
-            <div className="flex flex-wrap justify-center gap-4 max-sm:gap-2 mb-12 pt-16">
-              {["All", "Web App", "Landing Page"].map((item, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleFilter(item)}
-                  className={`px-4 py-2  text-[10px] sm:text-sm rounded-full font-bold transition-all ${
-                    activeFilter === item
-                      ? "btn-filter"
-                      : "btn-glass hover:text-accent-200"
-                  }`}
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-
-            {/* Work Portfolio */}
             <motion.div
-              animate={animateCard}
-              transition={{ duration: 0.5, delayChildren: 0.5 }}
-              className="grid grid-cols-1  lg:grid-cols-2 justify-center gap-8"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
             >
-              {filteredWorks.map((work, index) => (
-                <motion.div
-                  key={index}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                  className="md:p-4 rounded-3xl cursor-pointer transition-all relative group"
+              <Reveal className="text-[11px] tracking-[0.2em] uppercase text-[#555] sm:hidden">
+                02 / WORK
+              </Reveal>
+
+              <div className="mt-2">
+                <Reveal
+                  as={motion.h2}
+                  className="text-white font-black leading-[0.9] text-[clamp(64px,10vw,140px)]"
+                  style={{ letterSpacing: "-0.04em" }}
                 >
-                  {/* Work Image */}
-                  <div className="relative w-full h-[400px] mb-4 rounded-xl overflow-hidden group ">
-                    <div className="h-[80%] overflow-hidden rounded-xl">
-                      {/* Skeleton placeholder */}
-                      {imageLoadingStates[index] && <ImageSkeleton />}
+                  SELECTED
+                </Reveal>
+                <Reveal
+                  as={motion.h2}
+                  delay={0.1}
+                  className="text-white font-black leading-[0.9] text-[clamp(64px,10vw,140px)]"
+                  style={{ letterSpacing: "-0.04em" }}
+                >
+                  WORK
+                </Reveal>
+              </div>
 
-                      {/* Actual image */}
-                      <motion.img
-                        src={urlFor(work.imgUrl)}
-                        alt={work.title}
-                        className={`w-[90%] md:w-[80%] h-auto overflow-hidden object-cover mx-auto rounded-xl relative z-10 transition-opacity duration-300 ${
-                          imageLoadingStates[index]
-                            ? "opacity-0 absolute"
-                            : "opacity-100"
-                        }`}
-                        animate={
-                          hoveredIndex === index && !imageLoadingStates[index]
-                            ? { y: ["0%", "-10%"] }
-                            : { y: "0%" }
-                        }
-                        transition={{ duration: 3 }}
-                        loading="lazy"
-                        onLoad={() => handleImageLoad(index)}
-                        onError={() => handleImageLoad(index)} // Also hide skeleton on error
-                      />
-                    </div>
-
-                    {/*Hover Overlay*/}
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{
-                        opacity:
-                          hoveredIndex === index && !imageLoadingStates[index]
-                            ? 1
-                            : 0,
-                      }}
-                      transition={{ duration: 0.3 }}
-                      className={`w-[90%] md:w-[80%] h-[80%] mx-auto absolute inset-0 bg-black/50 flex items-center justify-center rounded-xl transition-all z-20 overflow-hidden  ${
-                        hoveredIndex === index && !imageLoadingStates[index]
-                          ? "opacity-100"
-                          : "opacity-0"
-                      }`}
-                    >
-                      <a
-                        href={work.projectLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-4 rounded-full bg-black/30 text-light-700 flex items-center justify-center hover:bg-secondary transition-all mx-2"
-                      >
-                        <FaEye size={20} />
-                      </a>
-                      <a
-                        href={work.codeLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-4 rounded-full bg-black/30 text-light-700 flex items-center justify-center hover:bg-secondary transition-all mx-2"
-                      >
-                        <FaGithub size={20} />
-                      </a>
-                    </motion.div>
-
-                    {/* Work Content */}
-                    <div className="flex flex-col text-start items-start work-container-glass rounded-xl p-4 gap-2 text-stone-300 absolute bottom-1 left-0 right-0 z-30">
-                      <span className="px-4 py-1 rounded-md work-tag  text-[10px] sm:text-sm font-medium">
-                        {work.tags[0]}
-                      </span>
-                      <h5 className="text-[20px] md:text-[30px] font-bold">
-                        {work.title}
-                      </h5>
-                      <p className="text-[12px] sm:text-sm">
-                        {work.description}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+              <Reveal className="mt-6 max-w-xl text-[15px] leading-relaxed text-[#888]">
+                A curated selection of projects built with restraint, systems
+                thinking, and performance in mind.
+              </Reveal>
             </motion.div>
           </div>
-        </motion.div>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {works.map((work, idx) => (
+              <Reveal key={work?._id ?? idx}>
+                <ProjectCard work={work} index={idx} />
+              </Reveal>
+            ))}
+          </motion.div>
+        </div>
       </Element>
     </section>
   );
-};
+});
 
 export default Works;

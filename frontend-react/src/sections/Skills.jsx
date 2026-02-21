@@ -1,100 +1,166 @@
-import { useState, useEffect } from "react";
+import React from "react";
 import { Element } from "react-scroll";
 import { motion } from "framer-motion";
-import { client, urlFor } from "../client";
-import CircleComponent from "../components/CircleComponent.jsx";
+import AmbientBeam from "../components/AmbientBeam.jsx";
+import Reveal from "../components/Reveal.jsx";
+import { ScrollVelocity } from "../components/ScrollVelocity.jsx";
+import { containerVariants } from "../hooks/useRevealAnimation.js";
 
-const Skills = () => {
-  const [skills, setSkills] = useState([]);
+const SKILL_ROWS = [
+  {
+    label: "Frontend Engineering",
+    items:
+      "React, Next.js, React Native, TypeScript, Tailwind, Framer Motion, GSAP. Responsive UIs, lazy loading, memoization, code-splitting, component systems.",
+  },
+  {
+    label: "Backend & API",
+    items:
+      "Node.js, Express, tRPC, Convex, REST APIs, WebSockets. JWT, OAuth, caching. MongoDB, PostgreSQL, Prisma.",
+  },
+  {
+    label: "Full-Stack Product",
+    items:
+      "End-to-end features, dashboards, admin panels, SaaS. E-commerce, real-time apps, data visualization. CI/CD, containerization, cloud deployments.",
+  },
+  {
+    label: "DevOps & Tools",
+    items:
+      "Docker · GitHub Actions · CI/CD · Vercel · AWS (EC2/S3) · Cloudinary · Firebase · Git",
+  },
+];
 
-  useEffect(() => {
-    const fetchSkills = async () => {
-      const query = "*[_type == 'skills'] | order(order asc)";
-      const data = await client.fetch(query);
-      setSkills(data);
-    };
-    fetchSkills();
-  }, []);
-  const transition = { duration: 1, ease: [0.25, 0.1, 0.25, 1] };
+const SCROLL_LINE_1 =
+  "REACT ✦ NEXT.JS ✦ TYPESCRIPT ✦ TAILWIND ✦ NODE.JS ✦ EXPRESS ✦ tRPC ✦ MONGODB ✦ POSTGRESQL ✦ PRISMA ✦ DOCKER ✦ VERCEL ✦ AWS ✦ ";
+const SCROLL_LINE_2 =
+  "FRONTEND ✦ BACKEND ✦ WEB3 ✦ AI SOLUTIONS ✦ MOBILE ✦ MVP ✦ FINTECH ✦ FULL-STACK ✦ ";
+
+const Skills = React.memo(function Skills() {
   return (
-    <section className="py-16 md:py-40  relative">
+    <section className="relative bg-[#0a0a0a] overflow-hidden">
       <Element name="skills">
-        <div className="blur-[10rem] h-40 w-40 bg-primary-300/50 absolute top-[10%] left-1/2 -translate-x-1/2 rounded-full -z-40" />
-        <div className="flex items-center justify-center z-0 mt-10">
-          <img
-            className="w-full h-[40%] absolute mask-radial mask-shape-ellipse mask-reach-closest-corner"
-            src="/assets/images/backgrounds/about-back.png"
-            alt="About-bg"
-          />
-          <CircleComponent />
-        </div>
-        <motion.div
-          whileInView={{ y: [100, 0], opacity: [0, 1] }}
-          transition={transition}
-          initial="hidden"
+        <AmbientBeam
+          color="#6366f1"
+          opacity={0.03}
+          position={{ bottom: "-140px", left: "-140px" }}
+          className="hidden sm:block"
+        />
+
+        <div
+          className="absolute inset-0 pointer-events-none select-none overflow-hidden flex items-center justify-center"
+          aria-hidden
         >
-          <div className="container mx-auto px-4 md:px-8 lg:max-w-screen-lg">
-            <div className="flex flex-col justify-center items-center text-center">
-              {/* Badge */}
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                className="[background:linear-gradient(45deg,#172033,theme(colors.slate.800)_50%,#172033)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.gray.500)_86%,_theme(colors.gray.300)_90%,_theme(colors.gray.500)_94%,_theme(colors.slate.600/.48))_border-box] rounded-full border border-transparent animate-border text-base capitalize inline-flex justify-center whitespace-nowrap font-medium bg-dark-400/30 backdrop-blur-[5rem] px-2 py-1 w-fit text-center"
-              >
-                My Skills
-              </motion.div>
+          <div
+            className="text-[clamp(80px,18vw,220px)] font-black text-transparent whitespace-nowrap"
+            style={{
+              WebkitTextStroke: "1px rgba(255,255,255,0.04)",
+              letterSpacing: "-0.04em",
+            }}
+          >
+            STACK
+          </div>
+        </div>
 
-              {/* Heading */}
-              <motion.h2
-                initial="hidden"
-                whileInView="visible"
-                className="text-2xl text-light-700 md:text-5xl font-bold bg-clip-text mt-4"
-              >
-                Stacked for Success
-              </motion.h2>
+        <div className="relative z-10 px-5 sm:px-12 md:px-16 lg:px-20 py-14 md:py-20">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <Reveal className="text-[11px] tracking-[0.2em] uppercase text-[#555]">
+              03 / SKILLS
+            </Reveal>
 
-              {/* Caption */}
-              <motion.p
-                initial="hidden"
-                whileInView="visible"
-                className="text-base md:text-lg mt-4 text-gray-400 md:max-w-xl mx-auto text-center"
+            <div className="mt-3">
+              <Reveal
+                as={motion.h2}
+                className="text-white font-black leading-[0.9] text-[clamp(56px,9vw,120px)]"
+                style={{ letterSpacing: "-0.04em" }}
               >
-                The tools and technologies that fuel my development journey.
-              </motion.p>
+                TOOLS &
+              </Reveal>
+              <Reveal
+                as={motion.h2}
+                delay={0.1}
+                className="text-white font-black leading-[0.9] text-[clamp(56px,9vw,120px)]"
+                style={{ letterSpacing: "-0.04em" }}
+              >
+                EXPERTISE
+              </Reveal>
             </div>
 
-            {/* Skills Grid */}
-            <div className="mt-12 mx-auto">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                className="grid max-sm:grid-cols-3 grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-2 lg:gap-6 place-items-center justify-items-center w-full"
-              >
-                {skills.map((skill, index) => (
-                  <motion.div
-                    key={index}
-                    whileHover={{ scale: 1.1 }}
-                    className="text-center cursor-pointer transition-all flex flex-col items-center group"
-                  >
-                    <div className="p-4 size-[90px] max-sm:size-[60px] rounded-full flex items-center justify-center skill-glass-container group-hover:skill-hover-bg shadow-md">
-                      <img
-                        src={urlFor(skill.icon)}
-                        alt={skill.name}
-                        className="size-[50px] max-sm:size-[30px]"
-                      />
-                    </div>
-                    <p className="text-base text-center sm:text-lg font-medium text-gray-400 group-hover:text-light-700 mt-4">
-                      {skill.name}
-                    </p>
-                  </motion.div>
-                ))}
-              </motion.div>
+            <Reveal className="mt-6 max-w-xl text-[15px] leading-relaxed text-[#888]">
+              Fast, scalable, production-ready applications—from frontend and
+              backend to DevOps and cloud.
+            </Reveal>
+          </motion.div>
+
+          {/* Scroll velocity marquee */}
+          <div className="relative overflow-x-hidden mt-12 py-4 opacity-50">
+            <div className="absolute left-0 top-0 w-24 h-full pointer-events-none z-10 bg-gradient-to-r from-[#0a0a0a] to-transparent" />
+            <div className="absolute right-0 top-0 w-24 h-full pointer-events-none z-10 bg-gradient-to-l from-[#0a0a0a] to-transparent" />
+            <div className="rotate-[-0.5deg]">
+              <div className="h-px bg-[#222] mb-2" />
+              <ScrollVelocity
+                texts={[SCROLL_LINE_1]}
+                velocity={45}
+                className="text-[#666] font-bold tracking-tight"
+              />
+              <div className="h-px bg-[#222] mt-2" />
+            </div>
+            <div className="relative overflow-x-hidden mt-4 rotate-[0.5deg]">
+              <div className="h-px bg-[#333] mb-2" />
+              <ScrollVelocity
+                texts={[SCROLL_LINE_2]}
+                velocity={-40}
+                className="text-[#555] font-bold tracking-tight"
+              />
+              <div className="h-px bg-[#333] mt-2" />
             </div>
           </div>
-        </motion.div>
+
+          {/* Skill rows — full width, large editorial style */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="mt-10 w-full"
+          >
+            {SKILL_ROWS.map((row, i) => (
+              <Reveal key={row.label}>
+                <div className="group grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 md:gap-16 py-8 md:py-10 border-b border-[#1a1a1a] w-full items-start transition-colors duration-300 hover:border-[#2a2a2a]">
+                  {/* Left — index + label */}
+                  <div className="flex items-start gap-5 md:gap-8">
+                    {/* Row number */}
+                    <span
+                      className="text-[clamp(40px,5vw,72px)] font-black text-[#1e1e1e] leading-none select-none group-hover:text-[#252525] transition-colors duration-300 shrink-0"
+                      style={{ letterSpacing: "-0.04em" }}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+
+                    {/* Label */}
+                    <h3
+                      className="text-white font-bold text-[clamp(18px,2.5vw,28px)] leading-tight mt-1"
+                      style={{ letterSpacing: "-0.02em" }}
+                    >
+                      {row.label}
+                    </h3>
+                  </div>
+
+                  {/* Right — description, full width of its column */}
+                  <p className="text-[#888] text-[clamp(14px,1.4vw,17px)] leading-relaxed md:pt-1 md:max-w-none">
+                    {row.items}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </motion.div>
+        </div>
       </Element>
     </section>
   );
-};
+});
 
 export default Skills;

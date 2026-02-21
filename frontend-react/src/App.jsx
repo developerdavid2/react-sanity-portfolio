@@ -1,86 +1,39 @@
 import Header from "./sections/Header.jsx";
 import Footer from "./sections/Footer.jsx";
 import { Outlet } from "react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import LoadingScreen from "./components/LoadingScreen.jsx";
-import { RouterProvider } from "react-router-dom";
-import router from "./routes/index.jsx";
+import { AnimatePresence } from "framer-motion";
+import CustomCursor from "./components/CustomCursor.jsx";
 
 export default function App() {
-  const cursorRef = useRef(null);
-  const targetX = useRef(0);
-  const targetY = useRef(0);
-  const currentX = useRef(0);
-  const currentY = useRef(0);
-
-  useEffect(() => {
-    const updateMousePosition = (e) => {
-      targetX.current = e.clientX;
-      targetY.current = e.clientY;
-    };
-
-    const handleMouseLeave = () => {
-      if (cursorRef.current) {
-        cursorRef.current.style.opacity = "0";
-      }
-    };
-
-    const handleMouseEnter = () => {
-      if (cursorRef.current) {
-        cursorRef.current.style.opacity = "1";
-      }
-    };
-
-    window.addEventListener("mousemove", updateMousePosition);
-    window.addEventListener("mouseleave", handleMouseLeave);
-    window.addEventListener("mouseenter", handleMouseEnter);
-
-    const animate = () => {
-      // Linear interpolation for smooth movement
-      currentX.current += (targetX.current - currentX.current) * 0.5;
-      currentY.current += (targetY.current - currentY.current) * 0.5;
-
-      if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate3d(${currentX.current}px, ${currentY.current}px, 0)`;
-      }
-      requestAnimationFrame(animate);
-    };
-
-    const animationId = requestAnimationFrame(animate);
-
-    return () => {
-      window.removeEventListener("mousemove", updateMousePosition);
-      window.removeEventListener("mouseleave", handleMouseLeave);
-      window.removeEventListener("mouseenter", handleMouseEnter);
-      cancelAnimationFrame(animationId);
-    };
-  }, []);
-
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 5000); // 5 seconds delay
+    }, 1200);
 
     return () => clearTimeout(timer); // Cleanup the timer on component unmount
   }, []);
 
   return (
     <>
-      <div ref={cursorRef} className="cursor max-md:hidden" />
+      <CustomCursor />
+      <AnimatePresence mode="wait">
+        {isLoading ? (
+          <LoadingScreen key="loader" />
+        ) : (
+          <div key="app">
+            <Header />
+            <main className="min-h-[calc(100vh-100px)] relative overflow-x-hidden">
+              <Outlet />
+            </main>
 
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        <>
-          <Header />
-          <main className="min-h-[calc(100vh-100px)] relative overflow-x-hidden">
-            <Outlet />
-          </main>
-          <Footer />
-        </>
-      )}
+            <Footer />
+          </div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

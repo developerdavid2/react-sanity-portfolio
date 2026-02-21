@@ -1,4 +1,10 @@
-import { FiUser, FiTool, FiGrid, FiPenTool, FiHome } from "react-icons/fi";
+import {
+  FiUser,
+  FiTool,
+  FiGrid,
+  FiHome,
+  FiMessageCircle,
+} from "react-icons/fi";
 
 import { Hero, About, Skills, Works, Reviews } from "../sections/index.jsx";
 
@@ -8,14 +14,14 @@ export const sections = [
     slug: "hero",
     icon: <FiHome />,
     dis: "translate-x-0",
-    component: Hero, // Specific component for About section
+    component: Hero,
   },
   {
     title: "About",
     slug: "about",
     icon: <FiUser />,
     dis: "translate-x-16",
-    component: About, // Specific component for About section
+    component: About,
   },
   {
     title: "Works",
@@ -34,7 +40,7 @@ export const sections = [
   {
     title: "Reviews",
     slug: "reviews",
-    icon: <FiPenTool />,
+    icon: <FiMessageCircle />,
     dis: "translate-x-64",
     component: Reviews,
   },

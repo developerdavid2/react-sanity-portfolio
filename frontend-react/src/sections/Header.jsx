@@ -5,7 +5,7 @@ import NavigationMobile from "../components/NavigationMobile";
 import NavProvider from "../contexts/NavProvider";
 import { sections } from "../constants";
 
-export default function Header() {
+const Header = React.memo(function Header() {
   const [isHeroVisible, setIsHeroVisible] = useState(true);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -43,7 +43,7 @@ export default function Header() {
           <motion.div
             initial={{ y: 0 }}
             animate={{ y: isHeroVisible ? 0 : -100 }} // Translate up when not visible
-            transition={{ type: "spring", stiffness: 100, damping: 20 }}
+            transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             className="absolute w-full"
           >
             {/* Animated NavigationMenu for md and above */}
@@ -60,7 +60,7 @@ export default function Header() {
           <motion.div
             initial={{ y: 100 }}
             animate={{ y: isHeroVisible ? -100 : 0 }} // Translate down when visible
-            transition={{ type: "spring", stiffness: 100, damping: 20 }}
+            transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             className="absolute w-full"
           >
             <NavigationMobile />
@@ -69,4 +69,6 @@ export default function Header() {
       </NavProvider>
     </header>
   );
-}
+});
+
+export default Header;

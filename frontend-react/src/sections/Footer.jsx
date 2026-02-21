@@ -1,35 +1,31 @@
+// Footer.jsx
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
-import FooterBg from "../components/FooterBg.jsx";
 
-const Footer = () => {
+const Footer = React.memo(function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-b from-transparent to-transparent max-sm:pb-10">
-      <div className="relative z-10">
-        <FooterBg />
-        <div className="w-full max-w-5xl px-4 xl:px-0 py-10 lg:pt-16 mx-auto">
-          <div className="inline-flex items-center">
-            <div className="flex flex-1 items-center">
-              <RouterLink
-                to="/"
-                className="ml-3 inline-flex text-light-400 hover:text-light-500"
-              >
-                <img
-                  src="/assets/images/full-logo.png"
-                  width={112}
-                  height={32}
-                  alt="logo"
-                />
-              </RouterLink>
-            </div>
+    <footer className="bg-[#0a0a0a] overflow-hidden">
+      {/* Big bold name — bleeds edge to edge like the hero */}
+      <div className="relative flex items-end justify-center overflow-hidden pt-10 select-none pointer-events-none">
+        <span
+          className="block font-black leading-[0.82] text-[clamp(80px,18vw,200px)] text-[#111]"
+          style={{ letterSpacing: "-0.04em" }}
+          aria-hidden="true"
+        >
+          JACOBS DAVID
+        </span>
+        {/* Fade out toward bottom so it bleeds into nothing */}
+        <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-b from-transparent to-[#0a0a0a]" />
+      </div>
 
-            <div className="border-s border-neutral-700 ps-5 ms-5">
-              <p className="text-sm text-neutral-400">© 2025 Jacobs David.</p>
-            </div>
-          </div>
+      {/* Meta row */}
+      <div className="border-t border-[#111] px-5 sm:px-12 md:px-16 lg:px-20 py-5">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#333]">
+          <span>© 2025 Jacobs David. All rights reserved.</span>
+          <span className="tracking-[0.15em] uppercase">Software Engineer</span>
         </div>
       </div>
     </footer>
   );
-};
+});
+
 export default Footer;

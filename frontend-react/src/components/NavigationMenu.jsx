@@ -25,19 +25,23 @@ export default function NavigationMenu({ links }) {
     <div className="max-w-5xl mx-auto lg:mt-4 md:px-6">
       <div
         className={clsx(
-          "flex min-h-14 w-full items-stretch justify-between gap-3 p-2  border-transparent nav-glass-container md:shadow-sm md:p-3 lg:border lg:border-gray-300/30 lg:rounded-full lg:relative sm:fixed sm:top-0 sm:z-50 backdrop-blur-sm",
+          "flex min-h-14 w-full items-stretch justify-between gap-3 p-2 bg-white/[0.03] border border-white/[0.06] backdrop-blur-[4px] md:p-3 lg:rounded-full lg:relative sm:fixed sm:top-0 sm:z-50",
           hasScrolled && "shadow-sm",
         )}
       >
         <div className="flex items-center">
           <RouterLink
             to="/"
+            data-cursor="hover"
             className="ml-3 inline-flex text-light-400 hover:text-light-500"
           >
             <img
               src="/assets/images/portfolio-logo.png"
               alt="logo"
               className="w-6 h-6 sm:w-10 sm:h-10"
+              width={40}
+              height={40}
+              decoding="async"
             />
           </RouterLink>
         </div>
@@ -53,10 +57,11 @@ export default function NavigationMenu({ links }) {
                   duration={0} // Ensure no delay in navigation
                   ref={activeLink === link.slug ? activeLinkRef : null}
                   onClick={() => setActiveLink(link.slug)}
+                  data-cursor="hover"
                   className={clsx(
-                    "inline-flex rounded-full px-3 py-1.5 text-light-700/70 hover:text-light-500 cursor-pointer",
+                    "inline-flex rounded-full px-3 py-1.5 text-[#aaa] hover:text-white cursor-pointer transition-colors",
                     {
-                      "text-light-600": activeLink === link.slug,
+                      "text-white": activeLink === link.slug,
                     },
                   )}
                 >
@@ -73,7 +78,8 @@ export default function NavigationMenu({ links }) {
             spy={true}
             offset={-50} // Adjust for header height
             duration={0}
-            className="btn-primary cursor-pointer text-[10px] sm:text-[12px]"
+            data-cursor="hover"
+            className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[10px] sm:text-[12px] font-medium text-white transition-all hover:bg-white/15 cursor-pointer"
           >
             Contact Me
           </ScrollLink>

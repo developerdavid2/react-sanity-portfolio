@@ -1,32 +1,40 @@
-import React from "react";
 import { motion } from "framer-motion";
-import { LampContainer } from "./ui/lamp.jsx";
 
-const LoadingScreen = () => {
+export default function LoadingScreen() {
   return (
-    <LampContainer>
-      <motion.div
-        initial={{ opacity: 0.5, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.3,
-          duration: 0.8,
-          ease: "easeInOut",
-        }}
-        className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
-      >
-        {/* LOGO DECOR */}
+    <motion.div
+      className="fixed inset-0 z-[9999] bg-[#0a0a0a] flex items-center justify-center"
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.4 } }}
+    >
+      <div className="flex flex-col items-center">
+        <motion.div
+          initial={{ filter: "blur(20px)", opacity: 0, scale: 0.95 }}
+          animate={{ filter: "blur(0px)", opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+          className="text-white font-black leading-none tracking-tight text-[120px] sm:text-[140px]"
+          style={{ letterSpacing: "-0.04em" }}
+        >
+          JD
+        </motion.div>
 
-        <div className="relative flex justify-center items-center h-20 w-20 md:h-40 md:w-40 rounded-full work-container-glass">
-          <img
-            src="/assets/images/portfolio-logo.png"
-            alt="logo"
-            className="lg:w-[6rem] w-[3rem] h-auto z-10 grayscale contrast-100 hover:grayscale-0 transition-all duration-300 animate-pulse"
-          />
-        </div>
-      </motion.div>
-    </LampContainer>
+        <motion.div
+          initial={{ width: 0, opacity: 0.8 }}
+          animate={{ width: 60, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+          className="h-px bg-[#333] mt-4"
+        />
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+          className="mt-4 text-[11px] tracking-[0.3em] uppercase text-[#555]"
+        >
+          jacobs david
+        </motion.div>
+      </div>
+    </motion.div>
   );
-};
-
-export default LoadingScreen;
+}
