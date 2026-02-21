@@ -8,8 +8,8 @@ const {
 } = require("tailwindcss/lib/util/flattenColorPalette");
 
 module.exports = {
-  darkMode: "class", // Enables dark mode with a `class` strategy
-  content: ["./src/**/*.{html,js,jsx,ts,tsx}"], // Adjust paths to your project files
+  darkMode: "class",
+  content: ["./src/**/*.{html,js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -27,8 +27,8 @@ module.exports = {
           800: "#065F46", // Darker emerald
         },
         neutral: {
-          light: colors.slate[300], // For subtle elements in light mode
-          dark: colors.slate[500], // For subtle elements in dark mode
+          light: colors.slate[300],
+          dark: colors.slate[500],
         },
         dark: {
           100: "#000000",
@@ -86,7 +86,7 @@ module.exports = {
         "light-300": "-10px 10px 20px 0px rgba(218, 213, 213, 0.10)",
         "dark-100": "0px 2px 10px 0px rgba(46, 52, 56, 0.10)",
         "dark-200": "2px 0px 20px 0px rgba(39, 36, 36, 0.04)",
-        glass: "0 4px 30px rgba(0, 0, 0, 0.1)", // Glassmorphism-specific
+        glass: "0 4px 30px rgba(0, 0, 0, 0.1)",
         myShadow1: "#059669",
         myShadow2: "#059669",
       },

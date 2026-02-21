@@ -172,7 +172,6 @@ const Reviews = React.memo(function Reviews() {
                 ))}
               </div>
 
-              {/* Decorative black cards between / below */}
               <div className="hidden md:flex justify-center gap-4 mt-8">
                 {DECO_ICONS.map((icon, i) => (
                   <div

@@ -14,7 +14,7 @@ export default function App() {
       setIsLoading(false);
     }, 1200);
 
-    return () => clearTimeout(timer); // Cleanup the timer on component unmount
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -29,7 +29,6 @@ export default function App() {
             <main className="min-h-[calc(100vh-100px)] relative overflow-x-hidden">
               <Outlet />
             </main>
-
             <Footer />
           </div>
         )}

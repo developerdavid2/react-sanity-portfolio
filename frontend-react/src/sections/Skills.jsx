@@ -118,7 +118,6 @@ const Skills = React.memo(function Skills() {
             </div>
           </div>
 
-          {/* Skill rows — full width, large editorial style */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -129,7 +128,6 @@ const Skills = React.memo(function Skills() {
             {SKILL_ROWS.map((row, i) => (
               <Reveal key={row.label}>
                 <div className="group grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-4 md:gap-16 py-8 md:py-10 border-b border-[#1a1a1a] w-full items-start transition-colors duration-300 hover:border-[#2a2a2a]">
-                  {/* Left — index + label */}
                   <div className="flex items-start gap-5 md:gap-8">
                     {/* Row number */}
                     <span
@@ -148,7 +146,6 @@ const Skills = React.memo(function Skills() {
                     </h3>
                   </div>
 
-                  {/* Right — description, full width of its column */}
                   <p className="text-[#888] text-[clamp(14px,1.4vw,17px)] leading-relaxed md:pt-1 md:max-w-none">
                     {row.items}
                   </p>

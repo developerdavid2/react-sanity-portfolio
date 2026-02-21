@@ -35,7 +35,7 @@ const Works = React.memo(function Works() {
             "0 1px 0 0 rgba(255,255,255,0.04) inset, 0 -1px 0 0 rgba(0,0,0,0.6) inset, 0 8px 32px rgba(0,0,0,0.5)",
         }}
       >
-        {/* Full-card image — fills entire card */}
+        {/* Full-card image*/}
         <div className="relative w-full h-[420px] lg:h-[460px] overflow-hidden bg-[#0d0d0d]">
           {img ? (
             <img
@@ -53,7 +53,6 @@ const Works = React.memo(function Works() {
             </div>
           )}
 
-          {/* Dark gradient at bottom so glass panel reads clearly */}
           <div
             className="pointer-events-none absolute inset-0"
             style={{
@@ -63,12 +62,11 @@ const Works = React.memo(function Works() {
             aria-hidden
           />
 
-          {/* Index — top left */}
           <div className="absolute top-4 left-4 text-[11px] tracking-[0.2em] uppercase text-white/30">
             {formatIndex(index)}
           </div>
 
-          {/* Arrow — top right, frosted pill */}
+          {/* Arrow — top right */}
           <div className="absolute top-4 right-4 h-8 w-8 rounded-full bg-white/[0.08] border border-white/[0.1] flex items-center justify-center backdrop-blur-sm transition-all duration-300 group-hover:bg-white/[0.14]">
             <FiArrowUpRight className="text-white/60 text-sm transition-transform duration-300 group-hover:rotate-45 group-hover:text-white" />
           </div>

@@ -25,7 +25,7 @@ const NavigationMobileMenu = () => {
             />
           )}
 
-          {/* Active indicator for mobile — simple underline/dot, no jolt */}
+          {/* Active indicator for mobile */}
           <span
             className={clsx(
               "absolute bottom-0 h-[2px] w-16 bg-white/20 rounded-full transition-transform duration-300 sm:hidden",
@@ -60,7 +60,7 @@ const NavigationMobileMenu = () => {
                   {menu.icon}
                 </span>
 
-                {/* Label — absolutely positioned so it NEVER shifts layout */}
+                {/* Label*/}
                 <span
                   className={clsx(
                     "absolute bottom-2 left-0 right-0 text-center text-[11px] transition-all duration-300",

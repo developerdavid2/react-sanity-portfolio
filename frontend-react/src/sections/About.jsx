@@ -1,8 +1,7 @@
+import { motion } from "framer-motion";
 import React from "react";
 import { Element } from "react-scroll";
-import { motion } from "framer-motion";
 import Reveal from "../components/Reveal.jsx";
-import AmbientBeam from "../components/AmbientBeam.jsx";
 import { containerVariants } from "../hooks/useRevealAnimation.js";
 
 const SOLUTIONS = [
@@ -50,7 +49,6 @@ const SOLUTIONS = [
   },
 ];
 
-// Stagger variants for the headline words
 const headlineContainer = {
   hidden: {},
   visible: {
@@ -68,7 +66,6 @@ const wordVariant = {
   },
 };
 
-// Headline words — each animates independently
 const HEADLINE_WORDS = ["I", "engineer", "digital", "products", "that scale."];
 
 const About = React.memo(function About() {
@@ -110,7 +107,7 @@ const About = React.memo(function About() {
               </Reveal>
             </div>
 
-            {/* Right — stats bento (filled up) */}
+            {/* Right — stats bento */}
             <div className="grid grid-cols-2 gap-4">
               {/* Years */}
               <Reveal
@@ -160,7 +157,7 @@ const About = React.memo(function About() {
                 </div>
               </Reveal>
 
-              {/* Stack focus — spans full width */}
+              {/* Stack focus */}
               <Reveal
                 className="col-span-2 rounded-2xl bg-white/[0.03] border border-white/[0.06] p-6"
                 style={{
@@ -221,7 +218,6 @@ const About = React.memo(function About() {
                 key={sol.title}
                 className={[
                   "rounded-2xl border p-7 lg:p-8 transition-all duration-300 flex flex-col justify-between",
-                  // First card spans 2 cols and has fixed height for the AI visual
                   index === 0
                     ? "lg:col-span-2 min-h-[320px] lg:min-h-[360px]"
                     : "min-h-[280px] lg:min-h-[320px]",
@@ -242,13 +238,11 @@ const About = React.memo(function About() {
                         : "0 1px 0 0 rgba(255,255,255,0.6) inset, 0 -1px 0 0 rgba(0,0,0,0.15) inset, 0 8px 32px rgba(0,0,0,0.15)",
                 }}
               >
-                {/* AI card — replace the geometric div with this */}
                 {index === 0 && (
                   <div
                     className="absolute top-0 bottom-0 right-0 overflow-hidden rounded-2xl pointer-events-none w-[50%]"
                     aria-hidden
                   >
-                    {/* AI robot image — right-aligned, fades out left */}
                     <div className="scale-150 size-full">
                       <img
                         src="/assets/images/ai-powered.png"
@@ -257,7 +251,6 @@ const About = React.memo(function About() {
                       />
                     </div>
 
-                    {/* Extra gradient fade on the left so text stays readable */}
                     <div
                       className="absolute inset-0"
                       style={{
@@ -268,7 +261,7 @@ const About = React.memo(function About() {
                   </div>
                 )}
                 <div className="relative z-10">
-                  {/* Title — large and bold */}
+                  {/* Title */}
                   <h3
                     className={[
                       "font-black leading-tight text-[clamp(22px,2.8vw,34px)]",
@@ -298,7 +291,7 @@ const About = React.memo(function About() {
                     ))}
                   </div>
 
-                  {/* Description — pushed to bottom */}
+                  {/* Description*/}
                   <p
                     className={[
                       "relative z-10 mt-6 text-[14px] lg:text-[15px] leading-relaxed max-w-md xl:max-w-xl",

@@ -51,10 +51,10 @@ export default function NavigationMenu({ links }) {
               <li key={link.slug}>
                 <ScrollLink
                   to={link.slug}
-                  smooth={false} // Disable smooth scrolling for immediate navigation
+                  smooth={false}
                   spy={true}
-                  offset={-50} // Adjust for header height
-                  duration={0} // Ensure no delay in navigation
+                  offset={-50}
+                  duration={0}
                   ref={activeLink === link.slug ? activeLinkRef : null}
                   onClick={() => setActiveLink(link.slug)}
                   data-cursor="hover"
@@ -74,9 +74,9 @@ export default function NavigationMenu({ links }) {
         <div className="flex items-center justify-end">
           <ScrollLink
             to="cta"
-            smooth={false} // Disable smooth scrolling for immediate navigation
+            smooth={false}
             spy={true}
-            offset={-50} // Adjust for header height
+            offset={-50}
             duration={0}
             data-cursor="hover"
             className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[10px] sm:text-[12px] font-medium text-white transition-all hover:bg-white/15 cursor-pointer"

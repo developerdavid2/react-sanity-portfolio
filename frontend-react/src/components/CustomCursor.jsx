@@ -55,7 +55,7 @@ export default function CustomCursor() {
       const cursorText = target?.getAttribute?.("data-cursor-text") || "";
 
       if (cursorType === "hover") {
-        ringScale.set(1.25); // 32px -> ~40px
+        ringScale.set(1.25);
         ringOpacity.set(0.6);
         dotOpacity.set(0);
         setLabel(cursorText);
@@ -105,7 +105,15 @@ export default function CustomCursor() {
       document.removeEventListener("mouseout", handleOut, true);
       if (labelTimeoutRef.current) clearTimeout(labelTimeoutRef.current);
     };
-  }, [dotOpacity, dotX, dotY, ringOpacity, ringScale, ringTargetX, ringTargetY]);
+  }, [
+    dotOpacity,
+    dotX,
+    dotY,
+    ringOpacity,
+    ringScale,
+    ringTargetX,
+    ringTargetY,
+  ]);
 
   return (
     <div className="custom-cursor pointer-events-none fixed inset-0 z-[9998] max-md:hidden">
@@ -135,4 +143,3 @@ export default function CustomCursor() {
     </div>
   );
 }
-

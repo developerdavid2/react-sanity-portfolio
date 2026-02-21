@@ -57,14 +57,13 @@ const Hero = React.memo(function Hero() {
 
         {/* Main content */}
         <div className="relative z-10 flex flex-1 flex-col px-6 sm:px-12 md:px-16 lg:px-20 pt-[clamp(6rem,15vh,10rem)] pb-24">
-          {/* THIS is the stagger container — motion.div with variants */}
+          {/* THIS is the stagger container */}
           <motion.div
             className="flex flex-col max-w-5xl lg:max-w-full"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
-            {/* 1 — Availability pill */}
             <motion.div variants={itemVariants} className="mb-8 md:mb-10">
               <span className="inline-flex items-center rounded-full border border-lime-400/40 px-3 py-1 text-xs text-lime-400">
                 <span className="relative flex h-1.5 w-1.5 mr-1.5">
@@ -75,7 +74,6 @@ const Hero = React.memo(function Hero() {
               </span>
             </motion.div>
 
-            {/* 2 — SOFTWARE */}
             <div className="overflow-hidden">
               <motion.h1
                 variants={itemVariants}
@@ -86,7 +84,6 @@ const Hero = React.memo(function Hero() {
               </motion.h1>
             </div>
 
-            {/* 3 — ENGINEER (separate motion element so it staggers after SOFTWARE) */}
             <div className="overflow-hidden">
               <motion.h1
                 variants={itemVariants}
@@ -97,7 +94,6 @@ const Hero = React.memo(function Hero() {
               </motion.h1>
             </div>
 
-            {/* 4 — Name */}
             <motion.p
               variants={itemVariants}
               className="mt-6 text-[#aaa] text-base md:text-lg font-light tracking-wide"
@@ -105,7 +101,6 @@ const Hero = React.memo(function Hero() {
               Jacobs David
             </motion.p>
 
-            {/* 5 — Descriptor */}
             <motion.p
               variants={itemVariants}
               className="mt-2 text-[#555] text-sm md:text-[15px] font-normal"
@@ -113,7 +108,6 @@ const Hero = React.memo(function Hero() {
               Building scalable digital products
             </motion.p>
 
-            {/* 6 — CTA buttons */}
             <motion.div
               variants={itemVariants}
               className="mt-10 flex flex-wrap gap-3"
@@ -142,7 +136,6 @@ const Hero = React.memo(function Hero() {
           </motion.div>
         </div>
 
-        {/* 7 — Bottom meta row (outside stagger container, animates independently) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

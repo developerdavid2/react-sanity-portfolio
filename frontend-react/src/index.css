@@ -174,8 +174,8 @@
   }
 
   .fixed-width-height-container {
-    max-width: 1200px; /* Adjust as needed */
-    max-height: 800px; /* Adjust as needed */
+    max-width: 1200px;
+    max-height: 800px;
     margin: 0 auto;
   }
 
@@ -208,7 +208,7 @@
 
   /* END OF CTA */
 
-  /* Custom cursor (two-layer system) */
+  /* Custom cursor */
   .cursor-dot,
   .cursor-ring {
     pointer-events: none;

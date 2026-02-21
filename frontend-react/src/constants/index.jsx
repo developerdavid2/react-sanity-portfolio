@@ -45,11 +45,3 @@ export const sections = [
     component: Reviews,
   },
 ];
-
-export const logoSlides = [
-  { src: "assets/images/logos/afterpay.svg", alt: "afterpay" },
-  { src: "assets/images/logos/sonos.svg", alt: "sonos" },
-  { src: "assets/images/logos/amplitude.svg", alt: "amplitude" },
-  { src: "assets/images/logos/drips.svg", alt: "drips" },
-  { src: "assets/images/logos/maze.svg", alt: "maze" },
-];

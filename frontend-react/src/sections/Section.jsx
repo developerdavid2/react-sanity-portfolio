@@ -16,13 +16,11 @@ export default function Section({ section }) {
     }
   }, [isInView, setActiveLink, section.slug]);
 
-  // Render Custom Component if it exists
   if (section.component) {
     const CustomComponent = section.component;
     return <CustomComponent section={section} />;
   }
 
-  // Default Layout if no specific component
   return (
     <section
       id={section.slug}

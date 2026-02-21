@@ -10,19 +10,17 @@ const Header = React.memo(function Header() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
-    // Handle visibility of Hero section
     const handleScroll = () => {
       setIsHeroVisible(window.scrollY < 100);
     };
 
-    // Handle screen size
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 640); // max-sm breakpoint
+      setIsSmallScreen(window.innerWidth <= 640);
     };
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleResize);
-    handleResize(); // Initialize on mount
+    handleResize();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -33,7 +31,6 @@ const Header = React.memo(function Header() {
   return (
     <header className="fixed top-0 w-full z-50">
       <NavProvider>
-        {/* Conditionally render based on screen size */}
         {isSmallScreen ? (
           <div className="w-full fixed top-0 z-50">
             {/* Fixed NavigationMenu for max-sm */}
@@ -42,24 +39,21 @@ const Header = React.memo(function Header() {
         ) : (
           <motion.div
             initial={{ y: 0 }}
-            animate={{ y: isHeroVisible ? 0 : -100 }} // Translate up when not visible
+            animate={{ y: isHeroVisible ? 0 : -100 }}
             transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             className="absolute w-full"
           >
-            {/* Animated NavigationMenu for md and above */}
             <NavigationMenu links={sections} />
           </motion.div>
         )}
-        {/* NavigationMobile: Visible when scrolled beyond Hero Section */}
         {isSmallScreen ? (
           <div className="w-full fixed top-0 z-50">
-            {/* Fixed NavigationMenu for max-sm */}
             <NavigationMobile />
           </div>
         ) : (
           <motion.div
             initial={{ y: 100 }}
-            animate={{ y: isHeroVisible ? -100 : 0 }} // Translate down when visible
+            animate={{ y: isHeroVisible ? -100 : 0 }}
             transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             className="absolute w-full"
           >
