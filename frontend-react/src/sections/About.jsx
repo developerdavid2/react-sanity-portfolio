@@ -75,7 +75,7 @@ const About = React.memo(function About() {
   return (
     <section className="relative overflow-hidden bg-[#0a0a0a]">
       <Element name="about">
-        <div className="relative z-10 px-5 sm:px-12 md:px-16 lg:px-20 py-14 md:py-20 flex flex-col gap-y-16">
+        <div className="relative z-10 px-5 sm:px-12 md:px-16 lg:px-20 md:py-20 flex flex-col gap-y-16">
           {/* TOP GRID — intro + stats */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
             {/* Left — staggered headline */}

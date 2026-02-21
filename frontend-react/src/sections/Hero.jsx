@@ -21,7 +21,7 @@ const Hero = React.memo(function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#0a0a0a]">
+    <section className="relative xl:min-h-screen flex flex-col overflow-hidden bg-[#0a0a0a]">
       <Element name="hero">
         {/* Background glow */}
         <motion.div

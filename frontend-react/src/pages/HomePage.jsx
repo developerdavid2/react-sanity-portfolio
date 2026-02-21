@@ -24,7 +24,7 @@ const HomePage = () => {
       <Skills />
       <SectionDivider />
 
-      <div className="relative overflow-y-hidden">
+      <div className="relative overflow-hidden">
         <div className="absolute -top-[20%] left-[50%] -rotate-[30deg] w-16 h-[100%] bg-gradient-to-b from-slate-200 via-slate-400 to-transparent blur-[100px] sm:blur-[120px] opacity-40 z-[50]"></div>
         <Reviews />
         <CallToAction />
